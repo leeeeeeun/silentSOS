@@ -1,28 +1,40 @@
 import SwiftUI
 
 struct MainView: View {
-    var body: some View{
-        // 화면전환 관리
-        NavigationStack{
-            VStack(spacing: 20){
-                Text("Silent SOS")
-                    .font(.largeTitle.bold())
+    var body: some View {
+        NavigationStack {
+            VStack(spacing: 15) {
+                // 상단 로고 
+                Image("app_logo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 120)
+                    .padding(.top, 50)
                     .padding(.bottom, 30)
 
-                // NaviationLink: 클릭 시 해당 View로 이동
-
-                NavigationLink(destination: FireView()){Text("화재")}
-                    .buttonStyle(SOSButtonStyle(color: .red))
-                NavigationLink(destination: CrimeView()){Text("범죄")}
-                    .buttonStyle(SOSButtonStyle(color: .orange))
-                NavigationLink(destination: MedicalView()){Text("구급")}
-                    .buttonStyle(SOSButtonStyle(color: .green))
-                NavigationLink(destination: KidnapView()){Text("납치")}
-                    .buttonStyle(SOSButtonStyle(color: .purple))
+            
+                VStack(spacing: 12) {
+                    NavigationLink(destination: FireView()) {
+                        SOSMenuButton(title: "화재", subTitle: "불/연기", icon: "ic_fire", color: Color(hex: "FF4141"))
+                    }
+                    
+                    NavigationLink(destination: CrimeView()) {
+                        SOSMenuButton(title: "범죄", subTitle: "위험한 사람", icon: "ic_crime", color: Color(hex: "FF9900"))
+                    }
+                    
+                    NavigationLink(destination: MedicalView()) {
+                        SOSMenuButton(title: "구급", subTitle: "아픔/부상", icon: "ic_medical", color: Color(hex: "74D37A"))
+                    }
+                    
+                    NavigationLink(destination: KidnapView()) {
+                        SOSMenuButton(title: "납치", subTitle: "끌려감", icon: "ic_kidnap", color: Color(hex: "D182E1"))
+                    }
+                }
+                .padding(.horizontal, 20)
+                
+                Spacer()
             }
-            .padding()
+            .background(Color.white)
         }
     }
-
-    
 }
